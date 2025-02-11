@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width:100%
+        }
+        th, td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color:grey;
+  }
+        
+    </style>
+</head>
+<body>
+    <h1>FACULTY TABLE</h1>
+    <table id="facultyTable">
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        // Corrected JSON data with commas and property name fix
+        var jsondata = `[
+            {
+                "name": "mrudula",
+                "designation": "host",
+                "email": "hod@gmail.com",
+                "phone number": "9987678765"
+            },
+            {
+                "name": "rajath",
+                "designation": "host",
+                "email": "hod@gmail.com",
+                "phone number": "9987678765"
+            }
+        ]`;
+
+        var data = JSON.parse(jsondata);
+        var facultyTableBody = document.querySelector("#facultyTable tbody");
+        var content = "<tr><th>Name</th><th>Designation</th><th>Email</th><th>Phone Number</th></tr>";
+
+        for (let i = 0; i < data.length; i++) {
+            let name = data[i].name;
+            let designation = data[i].designation;
+            let email = data[i].email;
+            let phone = data[i]['phone number']; // Accessing phone number property correctly
+
+            content += `<tr>
+                <td>${name}</td>
+                <td>${designation}</td>
+                <td>${email}</td>
+                <td>${phone}</td>
+            </tr>`;
+        }
+
+        facultyTableBody.innerHTML = content; // Set the generated content to the table body
+    </script>
+</body>
+</html>
