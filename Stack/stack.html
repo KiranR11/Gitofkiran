@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Operations</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #stack-container {
+            min-height: 150px;
+            border: 2px solid #28a745;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            background-color: #e9f5e9;
+        }
+
+        .stack-item {
+            padding: 10px;
+            border: 1px solid #28a745;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #d4edda;
+        }
+
+        .card {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h2>Stack Operations</h2>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <input type="text" id="stack-input" class="form-control" placeholder="Enter data">
+                </div>
+                <button id="push-button" class="btn btn-success">Push</button>
+                <button id="pop-button" class="btn btn-danger">Pop</button>
+                <div id="stack-container"></div>
+                <div id="message" class="mt-2 text-danger"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var stack = [];
+            var stackContainer = document.getElementById("stack-container");
+            var message = document.getElementById("message");
+
+            document.getElementById("push-button").addEventListener("click", function () {
+                var input = document.getElementById("stack-input").value;
+                if (input) {
+                    stack.push(input);
+                    updateStackDisplay();
+                    message.innerHTML = "";
+                }
+                document.getElementById("stack-input").value = "";
+            });
+
+            document.getElementById("pop-button").addEventListener("click", function () {
+                if (stack.length === 0) {
+                    message.innerHTML = "Stack Underflow";
+                } else {
+                    stack.pop();
+                    updateStackDisplay();
+                    message.innerHTML = "";
+                }
+            });
+
+            function updateStackDisplay() {
+                stackContainer.innerHTML = "";
+                for (var i = stack.length - 1; i >= 0; i--) {
+                    var stackItem = document.createElement("div");
+                    stackItem.className = "stack-item";
+                    stackItem.innerText = stack[i];
+                    stackContainer.appendChild(stackItem);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
